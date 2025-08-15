@@ -2,11 +2,9 @@
 
 namespace App\Providers;
 
-use App\Repositories\Aircrafts\AircraftRepository;
-use App\Repositories\EloquentAircraftRepository;
-use App\Repositories\EloquentReservationRepository;
-use App\Repositories\ReservationRepository;
 use Illuminate\Support\ServiceProvider;
+use App\Repositories\Aircraft\EloquentAircraftRepository;
+use App\Repositories\Aircraft\AircraftRepository;
 
 class AppServiceProvider extends ServiceProvider
 {

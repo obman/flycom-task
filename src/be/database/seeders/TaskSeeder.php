@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Task;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class TaskSeeder extends Seeder
 {
@@ -13,11 +13,35 @@ class TaskSeeder extends Seeder
      */
     public function run(): void
     {
-        Task::create([
-            [
+        DB::transaction(function() {
+            DB::table('tasks')->insert($this->getTasks());
+        });
+    }
 
+    private function getTasks(): array
+    {
+        $now = now();
+        return [
+            [
+                'name' => 'terrain-scan',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
-            []
-        ]);
+            [
+                'name' => 'test-task',
+                'created_at' => $now,
+                'updated_at' => $now
+            ],
+            [
+                'name' => 'test-task1',
+                'created_at' => $now,
+                'updated_at' => $now
+            ],
+            [
+                'name' => 'test-task2',
+                'created_at' => $now,
+                'updated_at' => $now
+            ]
+        ];
     }
 }

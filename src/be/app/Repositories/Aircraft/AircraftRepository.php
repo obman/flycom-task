@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Repositories\Aircrafts;
+namespace App\Repositories\Aircraft;
 
+use DateTime;
 use Illuminate\Database\Eloquent\Collection;
 
 interface AircraftRepository

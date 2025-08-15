@@ -16,7 +16,12 @@ class DatabaseSeeder extends Seeder
             AircraftTypesSeeder::class,
             AircraftSizesSeeder::class,
             AircraftSeeder::class,
-            EquipmentSeeder::class
+            EquipmentSeeder::class,
+            TaskSeeder::class,
+
+            AircraftEquipmentSeeder::class,
+
+            RolesSeeder::class,
         ]);
     }
 }

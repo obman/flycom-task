@@ -1,11 +1,14 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\Aircraft;
 
-use Illuminate\Database\Eloquent\Collection;
+use DateTime;
+use App\Models\Aircraft;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Collection;
 
-class EloquentAircraftRepository
+class EloquentAircraftRepository implements AircraftRepository
 {
     public function availableAircraftsByDate(DateTime $from, DateTime $to): Collection
     {

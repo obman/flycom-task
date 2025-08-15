@@ -7,8 +7,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Equipment extends Model
 {
-    public function aircraft(): BelongsToMany
+    public function aircrafts(): BelongsToMany
     {
         return $this->belongsToMany(Aircraft::class);
+    }
+
+    public function tasks(): BelongsToMany
+    {
+        return $this->belongsToMany(Task::class);
     }
 }

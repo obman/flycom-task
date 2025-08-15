@@ -9,10 +9,10 @@ class ReservationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'from' => 'required|date',
-            'to' => 'required|date',
-            'aircraft' => 'required|exists:aircrafts',
-            'task' => 'required|exists:tasks'
+            'from' => 'required|date|bail',
+            'to' => 'required|date|bail',
+            'aircraft' => 'required|exists:aircrafts,id|bail',
+            'task' => 'required|exists:tasks,id'
         ];
     }
 }

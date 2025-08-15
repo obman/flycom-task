@@ -14,14 +14,29 @@ class EquipmentSeeder extends Seeder
     public function run(): void
     {
         DB::transaction(function() {
-            DB::table('equipment')->insert([
-                [
-                    'name' => 'radar'
-                ],
-                [
-                    'name' => 'laser'
-                ]
-            ]);
+            DB::table('equipment')->insert($this->getEquipment());
         });
+    }
+
+    private function getEquipment(): array
+    {
+        $now = now();
+        return [
+            [
+                'name' => 'radar',
+                'created_at' => $now,
+                'updated_at' => $now
+            ],
+            [
+                'name' => 'laser',
+                'created_at' => $now,
+                'updated_at' => $now
+            ],
+            [
+                'name' => 'napalm',
+                'created_at' => $now,
+                'updated_at' => $now
+            ]
+        ];
     }
 }
