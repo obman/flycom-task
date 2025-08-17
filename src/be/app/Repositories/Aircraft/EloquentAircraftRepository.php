@@ -5,11 +5,11 @@ namespace App\Repositories\Aircraft;
 use DateTime;
 use App\Models\Aircraft;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
 class EloquentAircraftRepository implements AircraftRepository
-{
+{   
     public function availableAircraftsByDate(DateTime $from, DateTime $to): Collection
     {
         return Aircraft::whereDoesntHave('reservations', function (Builder $query) use ($from, $to) {
@@ -19,6 +19,8 @@ class EloquentAircraftRepository implements AircraftRepository
             );
         })->get();
     }
+
+    // TODO: available Tasks by date
 
     public function availableEquipmentByTask(int $aircraftId, int $taskId)
     {

@@ -15,7 +15,7 @@ class Aircraft extends Model
 
     public function equipment(): BelongsToMany
     {
-        return $this->belongsToMany(Equipment::class)->withPivot('quantity');
+        return $this->belongsToMany(Equipment::class, 'equipment_aircraft')->withPivot('quantity');
     }
 
     public function reservations(): HasMany

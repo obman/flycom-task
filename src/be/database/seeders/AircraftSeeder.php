@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Aircraft;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class AircraftSeeder extends Seeder
 {
@@ -13,10 +13,29 @@ class AircraftSeeder extends Seeder
      */
     public function run(): void
     {
-        Aircraft::create([
-            'type_id' => 1,
-            'size_id' => 1,
-            'name' => 'Aircraft Test 1'
-        ]);
+        DB::transaction(function () {
+            DB::table('aircrafts')->insert($this->getAircrafts());
+        });
+    }
+
+    private function getAircrafts(): array
+    {
+        $now = now();
+        return [
+            [
+                'type_id' => 1,
+                'size_id' => 1,
+                'name' => 'Aircraft Test 1',
+                'created_at' => $now,
+                'updated_at' => $now,
+            ],
+            [
+                'type_id' => 2,
+                'size_id' => 2,
+                'name' => 'Aircraft Test 2',
+                'created_at' => $now,
+                'updated_at' => $now,
+            ]
+        ];
     }
 }

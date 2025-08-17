@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             TaskSeeder::class,
 
             AircraftEquipmentSeeder::class,
+            EquipmentTaskSeeder::class,
 
             RolesSeeder::class,
         ]);

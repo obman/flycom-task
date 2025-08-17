@@ -2,6 +2,7 @@
 
 namespace App\DTO;
 
+use App\Models\User;
 use DateTimeImmutable;
 
 readonly class ReservationDto
@@ -10,7 +11,8 @@ readonly class ReservationDto
         public int $aircraftId,
         public int $taskId,
         public string $from,
-        public string $to
+        public string $to,
+        public User $user
     )
     {}
 }
