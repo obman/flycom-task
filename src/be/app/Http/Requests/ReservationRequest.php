@@ -3,6 +3,9 @@
 namespace App\Http\Requests;
 
 use App\Models\User;
+use App\DTO\ReservationDto;
+use App\Enums\ReservationType;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ReservationRequest extends FormRequest
@@ -10,19 +13,26 @@ class ReservationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'from' => 'required|date|bail',
-            'to' => 'required|date|bail',
-            'aircraft' => 'required|exists:aircrafts,id|bail',
-            'task' => 'required|exists:tasks,id'
+            'dates' => 'required|array|min:1',
+            'date.*' => 'required|date',
+            'task' => 'required|exists:tasks,id',
+            'aircraft' => 'required|exists:aircrafts,id',
+            'mode' => ['required', Rule::enum(ReservationType::class)]
         ];
     }
 
-    protected function prepareForValidation(): void
+    public function toDto(): ReservationDto
     {
+        $data = $this->validated();
+
         // assuming user was authenticated via Auth::user()
-        // for sake of simplicity and mocking user is predefined
-        $this->merge([
-            'user' => User::find(1)
-        ]);
+        // for sake of simplicity and mocking, user is predefined
+        return new ReservationDto(
+            aircraftId: $data['aircraft'],
+            taskId: $data['task'],
+            dates: $data['dates'],
+            mode: ReservationType::from($data['mode']),
+            user: User::find(1)
+        );
     }
 }

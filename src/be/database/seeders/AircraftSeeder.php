@@ -35,6 +35,13 @@ class AircraftSeeder extends Seeder
                 'name' => 'Aircraft Test 2',
                 'created_at' => $now,
                 'updated_at' => $now,
+            ],
+            [
+                'type_id' => 2,
+                'size_id' => 1,
+                'name' => 'Aircraft Test 3',
+                'created_at' => $now,
+                'updated_at' => $now,
             ]
         ];
     }

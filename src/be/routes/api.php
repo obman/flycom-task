@@ -11,16 +11,9 @@ use App\Repositories\Aircraft\AircraftRepository;
 
 Route::prefix('v1')->group(function() {
     Route::prefix('reservation')->group(function() {
-        Route::get('/aircrafts', [AircraftController::class, 'index']);
-        Route::get('/task/{aircraft}', [TaskController::class, 'getTasksByAircraft']);
-        Route::get('{aircraft}/{task}/{date}', [ReservationController::class, 'getAvailableDates']);
+        Route::get('/tasks', [TaskController::class, 'index']);
+        Route::get('/aircraft/{task}', [AircraftController::class, 'getAircraftsByTask']);
+        Route::get('/{task}/{aircraft}/{date}', [ReservationController::class, 'getAvailableDates']);
         Route::post('/', [ReservationController::class, 'store']);
-
-        Route::get('/reservation', function(Request $request, AircraftRepository $repository) {
-            $from = Carbon::parse($request->from);
-            $to = Carbon::parse($request->to);
-            $aircrafts = $repository->availableAircraftsByDate($from, $to);
-            dd($aircrafts);
-        });
     });
 });

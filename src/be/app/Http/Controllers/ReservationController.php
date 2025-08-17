@@ -7,6 +7,8 @@ use App\Models\Aircraft;
 use Illuminate\Support\Carbon;
 use App\Services\ReservationService;
 use App\Http\Requests\ReservationRequest;
+use App\Http\Resources\ReservationDaysResource;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class ReservationController extends Controller
 {
@@ -15,17 +17,17 @@ class ReservationController extends Controller
     )
     {}
 
-    public function getAvailableDates(Aircraft $aircraft, Task $task, Carbon $date)
+    public function getAvailableDates(Task $task, Aircraft $aircraft, Carbon $date): AnonymousResourceCollection
     {
-        // TODO: get available dates for given month
-        $dates = $this->reservationService->getDates($aircraft, $task, $date);
+        $datesWithIds = $this->reservationService->getDates($task, $aircraft, $date);
+        return ReservationDaysResource::collection($datesWithIds);
     }
 
-    public function store(ReservationRequest $request, ReservationService $reservationService)
+    public function store(ReservationRequest $request)
     {
-        $data = $request->validated();
-        $reservationService->reserve($data);
-        // TODO: api resource response with data
-        return true;
+        $this->reservationService->reserve($request->toDto());
+        return response([
+            'code' => 'reservation.success'
+        ]);
     }
 }

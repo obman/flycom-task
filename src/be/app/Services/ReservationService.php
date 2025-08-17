@@ -6,28 +6,40 @@ use App\Models\Task;
 use App\Models\Aircraft;
 use App\DTO\ReservationDto;
 use Illuminate\Support\Carbon;
-use App\Repositories\Aircraft\AircraftRepository;
+use Illuminate\Support\Collection;
 use App\Repositories\Reservation\ReservationRepository;
 
 class ReservationService
 {
     public function __construct(
         private ReservationRepository $reservationRepository,
-        private AircraftRepository $aircraftRepository
     )
     {}
 
-    public function getDates(Aircraft $aircraft, Task $task, Carbon $month): array
+    public function getDates(Task $task, Aircraft $aircraft, Carbon $month): Collection
     {
-        return $this->reservationRepository->getAvailableDatesForMonth($aircraft, $task, $month);
+        $tasks = $aircraft->getCompatibleTasksByAircraftEquipment();
+        if ($tasks->isEmpty()) {
+            throw new \Exception('No compatible tasks.');
+        }
+        $aircrafts = $task->getCompatibleAircraftsByTaskEquipment();
+        if ($aircrafts->isEmpty()) {
+            throw new \Exception('No compatible aircrafts.');
+        }
+
+        $taskIds = $tasks->pluck('id')->toArray();
+        $aircraftIds = $aircrafts->pluck('id')->toArray();
+        $dates = $this->reservationRepository->getAvailableDatesForMonth($taskIds, $aircraftIds, $month);
+        return collect($dates)->values()->map(function ($date, $index) {
+            return [
+                'id' => $index + 1,
+                'date' => $date,
+            ];
+        });
     }
 
-    public function reserve(array $data)
+    public function reserve(ReservationDto $dto)
     {
-        // TODO: check if aircraft is available
-        // TODO: check if equipment is for the task
-        // TODO: get first empty date
-        $reservationDto = new ReservationDto($data['aircraft'], $data['task'], $data['from'], $data['to'], $data['user']);
-        $this->reservationRepository->store($reservationDto);
+        $this->reservationRepository->store($dto);
     }
 }

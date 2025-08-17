@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reservations', function (Blueprint $table) {
+        Schema::create('reservation_days', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('aircraft_id')->constrained('aircrafts')->cascadeOnDelete();
-            $table->foreignId('task_id')->constrained()->cascadeOnDelete();
-            $table->morphs('created_by');
-            $table->softDeletes();
+            $table->foreignId('reservation_id')->constrained()->onCascadeDelete();
+            $table->date('reserved_date');
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reservations');
+        Schema::dropIfExists('reservation_days');
     }
 };

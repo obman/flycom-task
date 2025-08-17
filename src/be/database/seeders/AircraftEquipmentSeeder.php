@@ -24,7 +24,7 @@ class AircraftEquipmentSeeder extends Seeder
     {
         $sets = [];
         $now = now();
-        $aircrafts = Aircraft::all();
+        /*$aircrafts = Aircraft::all();
         $equipment = Equipment::all();
         foreach ($aircrafts as $aircraft) {
             foreach ($equipment as $unit) {
@@ -36,6 +36,32 @@ class AircraftEquipmentSeeder extends Seeder
                 ];
             }
         }
-        return $sets;
+        return $sets;*/
+        return [
+            [
+                'aircraft_id' => 1,
+                'equipment_id' => 1,
+                'created_at' => $now,
+                'updated_at' => $now
+            ],
+            [
+                'aircraft_id' => 1,
+                'equipment_id' => 2,
+                'created_at' => $now,
+                'updated_at' => $now
+            ],
+            [
+                'aircraft_id' => 2,
+                'equipment_id' => 1,
+                'created_at' => $now,
+                'updated_at' => $now
+            ],
+            [
+                'aircraft_id' => 3,
+                'equipment_id' => 3,
+                'created_at' => $now,
+                'updated_at' => $now
+            ]
+        ];
     }
 }

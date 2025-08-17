@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Reservation extends Model
@@ -23,5 +24,10 @@ class Reservation extends Model
     public function createdBy(): MorphTo
     {
         return $this->morphTo();
+    }
+
+    public function days(): HasMany
+    {
+        return $this->hasMany(ReservationDays::class);
     }
 }

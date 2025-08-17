@@ -9,11 +9,11 @@ class Equipment extends Model
 {
     public function aircrafts(): BelongsToMany
     {
-        return $this->belongsToMany(Aircraft::class);
+        return $this->belongsToMany(Aircraft::class, 'equipment_aircraft');
     }
 
     public function tasks(): BelongsToMany
     {
-        return $this->belongsToMany(Task::class);
+        return $this->belongsToMany(Task::class, 'equipment_task');
     }
 }

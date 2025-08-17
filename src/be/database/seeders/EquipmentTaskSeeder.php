@@ -29,20 +29,14 @@ class EquipmentTaskSeeder extends Seeder
                 'updated_at' => $now
             ],
             [
-                'task_id' => 2,
-                'equipment_id' => 1,
-                'created_at' => $now,
-                'updated_at' => $now
-            ],
-            [
-                'task_id' => 3,
-                'equipment_id' => 1,
-                'created_at' => $now,
-                'updated_at' => $now
-            ],
-            [
                 'task_id' => 1,
                 'equipment_id' => 2,
+                'created_at' => $now,
+                'updated_at' => $now
+            ],
+            [
+                'task_id' => 2,
+                'equipment_id' => 1,
                 'created_at' => $now,
                 'updated_at' => $now
             ],
@@ -61,6 +55,12 @@ class EquipmentTaskSeeder extends Seeder
             [
                 'task_id' => 4,
                 'equipment_id' => 1,
+                'created_at' => $now,
+                'updated_at' => $now
+            ],
+            [
+                'task_id' => 4,
+                'equipment_id' => 2,
                 'created_at' => $now,
                 'updated_at' => $now
             ],
