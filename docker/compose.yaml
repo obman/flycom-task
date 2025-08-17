@@ -102,6 +102,8 @@ services:
       - /app/node_modules/
     environment:
       - HOST=0.0.0.0
+    networks:
+      - app-be-network
 
 # Docker Networks
 networks:

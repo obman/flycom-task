@@ -12,7 +12,7 @@ use App\Repositories\Aircraft\AircraftRepository;
 Route::prefix('v1')->group(function() {
     Route::prefix('reservation')->group(function() {
         Route::get('/tasks', [TaskController::class, 'index']);
-        Route::get('/aircraft/{task}', [AircraftController::class, 'getAircraftsByTask']);
+        Route::get('/aircrafts/{task}', [AircraftController::class, 'getAircraftsByTask']);
         Route::get('/{task}/{aircraft}/{date}', [ReservationController::class, 'getAvailableDates']);
         Route::post('/', [ReservationController::class, 'store']);
     });
